@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
+import Todos from './components/Todos'
 
 class App extends Component {
   render() {
     return (
+      // <Todos /> is the customized Tag that created in Todos.js
       <div className="App">
-        <h1>Hello App</h1>
+        <Todos />
       </div>
     );
   }
