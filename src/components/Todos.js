@@ -7,11 +7,14 @@ import React, { Component } from 'react';
 class Todos extends Component {
   render() {
     // console.log(this.props.todos); // will be printed all of todos state that created in the state come from App.js
-    return (
-      <div>
-        <h1>Todos</h1>
-      </div>
-    );
+
+    // Modified parentesist
+    // Below is actually looping each
+    return this.props.todos.map((todo) => (
+      // Print all the title in todo state
+      <h3> {todo.title} </h3>
+    ));
+
   }
 }
 
