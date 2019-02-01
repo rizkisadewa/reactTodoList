@@ -1,7 +1,8 @@
 // Uper Case each word is for the convention of the component
 
 import React, { Component } from 'react';
-import TodoItem from './TodoItem'
+import TodoItem from './TodoItem';
+import PropTypes from 'prop-types';
 
 // Make a new component that copy from App.js, but we just modified the class name and export default into Todos.
 // We do not need the tag with the calss App as that only in App.js.
@@ -18,6 +19,11 @@ class Todos extends Component {
     ));
 
   }
+}
+
+// PropType 
+Todos.propsTypes = {
+  todos : PropsTypes.array.isRequired
 }
 
 export default Todos;
