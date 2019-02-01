@@ -6,15 +6,11 @@ export class TodoItem extends Component {
 
   // method for CSS dynamic, long way
   getStyle = () => {
-    if (this.props.todo.completed){
-      return {
-        textDecoration : 'line-through',
-        backgroundColor : 'red'
-      }
-    } else {
-      return {
-        textDecoration : 'none'
-      }
+    return {
+      background: '#f4f4f4',
+      padding: '10px',
+      borderBottom: '1px #ccc dotted',
+      textDecoration: this.props.todo.completed ? 'line-through' : 'none'
     }
   }
 
