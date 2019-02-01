@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 export class TodoItem extends Component {
 
   // method for CSS dynamic, long way
@@ -14,10 +13,24 @@ export class TodoItem extends Component {
     }
   }
 
+  // // mark completed method, but we cannot make any change the state,
+  // // we need to the climb the tree
+  // markCompleted = (e) => {
+  //   console.log(this.props);
+  // }
+
+  // climb the tree is only make a method markCompleted in Todos.js
+
   render(){
+    // distructuring pull out the variable
+    const {id, title} = this.props.todo;
+    
     return(
       <div style={this.getStyle()}>
-        <p> {this.props.todo.title} </p>
+        <p>
+          <input type="checkbox" onChange={this.props.markComplete.bind(this, id)} /> {' '}
+          { title }
+        </p>
       </div>
     )
   }
