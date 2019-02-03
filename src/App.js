@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   // Method to for dynamic, Toggle Complete
-  markComplete = (id) => {
+  toggleComplete = (id) => {
     // console.log(id); // just to make sure that when we click, then we choose in certain id in state
 
     // we need to match the id that parsing in parameter with the id in state when is check
@@ -50,7 +50,7 @@ class App extends Component {
     return (
       // <Todos /> is the customized Tag that created in Todos.js at components folder
       <div className="App">
-        <Todos todos={this.state.todos} markComplete={this.markComplete}/>
+        <Todos todos={this.state.todos} toggleComplete={this.toggleComplete}/>
       </div>
     );
   }

@@ -24,11 +24,11 @@ export class TodoItem extends Component {
   render(){
     // distructuring pull out the variable
     const {id, title} = this.props.todo;
-    
+
     return(
       <div style={this.getStyle()}>
         <p>
-          <input type="checkbox" onChange={this.props.markComplete.bind(this, id)} /> {' '}
+          <input type="checkbox" onChange={this.props.toggleComplete.bind(this, id)} /> {' '}
           { title }
         </p>
       </div>
