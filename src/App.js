@@ -27,7 +27,8 @@ class App extends Component {
     ]
   }
 
-  // Method to for dynamic, Toggle Complete
+
+  /* Method for dynamic : Toggle Complete */
   toggleComplete = (id) => {
     // console.log(id); // just to make sure that when we click, then we choose in certain id in state
 
@@ -43,6 +44,18 @@ class App extends Component {
       return todo;
     })})
   }
+  /* /Method for dynamic : Toggle Complete */
+
+  /* Method for dynamic : Delete Todo */
+
+  delTodo = (id) => {
+    console.log(id); //test the button is working
+
+    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !==id)]});
+    //... mean copy everything that has already in state. Then we filter all the state which is id not the same with the id that we click
+  }
+
+  /* /Method for dynamic : Delete Todo */
 
 
   render() {
@@ -50,7 +63,7 @@ class App extends Component {
     return (
       // <Todos /> is the customized Tag that created in Todos.js at components folder
       <div className="App">
-        <Todos todos={this.state.todos} toggleComplete={this.toggleComplete}/>
+        <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} delTodo={this.delTodo}/>
       </div>
     );
   }

@@ -17,7 +17,7 @@ class Todos extends Component {
     return this.props.todos.map((todo) => (
       // Print all the title in todo state, come from TodoItem.js
       // Every single map must have a key that unique, todo.id is a unique value
-      <TodoItem key={todo.id} todo={todo} toggleComplete = {this.props.toggleComplete} />
+      <TodoItem key={todo.id} todo={todo} toggleComplete = {this.props.toggleComplete} delTodo = {this.props.delTodo}/>
     ));
 
   }
