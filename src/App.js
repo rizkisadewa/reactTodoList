@@ -27,7 +27,7 @@ class App extends Component {
     ]
   }
 
-  // Method to for dynamic, Toggle Complete 
+  // Method to for dynamic, Toggle Complete
   markComplete = (id) => {
     // console.log(id); // just to make sure that when we click, then we choose in certain id in state
 
@@ -37,7 +37,7 @@ class App extends Component {
       // if that state id is equal to id parsing in parameter
       if (todo.id === id) {
         todo.completed = !todo.completed
-        // we do not use todo.completed = True, due to we do that, the completed value will always true even we un-check the box.
+        // we do not use todo.completed = True, if we do that, the completed value will always true even we un-check the box.
         // therefore, we need to set like the above so that we can set the opposite what ever the value
       }
       return todo;
