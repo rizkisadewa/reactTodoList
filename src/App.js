@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './components/layout/Header';
 import Todos from './components/Todos'; // import Todos component from folder components
 
 import './App.css'; // Import the CSS from App.css
@@ -63,6 +64,7 @@ class App extends Component {
     return (
       // <Todos /> is the customized Tag that created in Todos.js at components folder
       <div className="App">
+        <Header />
         <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} delTodo={this.delTodo}/>
       </div>
     );
