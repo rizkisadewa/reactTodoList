@@ -59,15 +59,29 @@ class App extends Component {
 
   /* /Method for dynamic : Delete Todo */
 
+  /* Method for dynamic : Add Todo */
+  addTodo = (title) => {
+    // console.log(title); // test the button is working
+    const newTodo = {
+      id : 4,
+      title,
+      completed : false
+    }
+    this.setState({todos:[...this.state.todos, newTodo]});
+  }
+
+  /* /Method for dynamic : Add Todo */
 
   render() {
     // console.log(this.state.todos) // will be shown the state in the console
     return (
       // <Todos /> is the customized Tag that created in Todos.js at components folder
       <div className="App">
-        <Header />
-        <AddTodo />
-        <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} delTodo={this.delTodo}/>
+        <div>
+          <Header />
+          <AddTodo addTodo={this.addTodo} />
+          <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} delTodo={this.delTodo}/>
+        </div>
       </div>
     );
   }
