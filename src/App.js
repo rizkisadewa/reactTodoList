@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'; // a package for router
 import Header from './components/layout/Header'; // import header layout from folder ./components/layout
 import Todos from './components/Todos'; // import Todos component from folder ./components
 import AddTodo from './components/AddTodo'; // import Todos component from folder ./components
+import About from './components/pages/About'; // import About component from folder ./components/pages
 import uuid from 'uuid'; // generate random id
 
 import './App.css'; // Import the CSS from App.css
@@ -10,7 +12,7 @@ class App extends Component {
 
   // State is like a database to create a value, each component will have a state.
   // We can pass down the state into Todos as a props
-  // uuid will generate different id in random 
+  // uuid will generate different id in random
   state = {
     todos : [
       {
@@ -76,15 +78,25 @@ class App extends Component {
 
   render() {
     // console.log(this.state.todos) // will be shown the state in the console
+    // Every single component should be wraped in Router if we would like to set up router
+    // <Todos /> is the customized Tag that created in Todos.js at components folder
     return (
-      // <Todos /> is the customized Tag that created in Todos.js at components folder
-      <div className="App">
-        <div>
-          <Header />
-          <AddTodo addTodo={this.addTodo} />
-          <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} delTodo={this.delTodo}/>
+      <Router>
+
+        <div className="App">
+          <div>
+            <Header />
+            <Route exact path="/" render={props =>(
+                <React.Fragment>
+                  <AddTodo addTodo={this.addTodo} />
+                  <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} delTodo={this.delTodo}/>
+                </React.Fragment>
+              )} />
+            <Route path="/about" component={About}/>
+
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
