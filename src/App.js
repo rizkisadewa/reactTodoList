@@ -7,31 +7,39 @@ import About from './components/pages/About'; // import About component from fol
 import uuid from 'uuid'; // generate random id
 
 import './App.css'; // Import the CSS from App.css
+import axios from 'axios'; // import axios API
 
 class App extends Component {
 
-  // State is like a database to create a value, each component will have a state.
-  // We can pass down the state into Todos as a props
-  // uuid will generate different id in random
-  state = {
-    todos : [
-      {
-        id: uuid.v4(),
-        title: 'Take out the trash',
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Dinner with wife',
-        completed: true
-      },
-      {
-        id: uuid.v4(),
-        title: 'Meeting with boss',
-        completed: false
-      }
-    ]
-  }
+    // State is like a database to create a value, each component will have a state.
+    // We can pass down the state into Todos as a props
+    // uuid will generate different id in random
+    state = {
+      todos : [
+        // Hard code of the state value
+        // {
+        //   id: uuid.v4(),
+        //   title: 'Take out the trash',
+        //   completed: false
+        // },
+        // {
+        //   id: uuid.v4(),
+        //   title: 'Dinner with wife',
+        //   completed: true
+        // },
+        // {
+        //   id: uuid.v4(),
+        //   title: 'Meeting with boss',
+        //   completed: false
+        // }
+      ]
+    }
+
+    // Get the component from the API using axios with json format 
+    componentDidMount(){
+      axios.get('https://jsonplaceholder.typicode.com/todos/?_limit=10')
+      .then(res => this.setState({todos: res.data}))
+    }
 
 
   /* Method for dynamic : Toggle Complete */
