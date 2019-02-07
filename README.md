@@ -1,10 +1,11 @@
 ## Todo List Application
 This is Todo list application that created using React, make a simple to do list and just thick the list that has completed
+This todo list what I learn from Brad Traversy
 
 ## What I Learn
 Create Todo List Application with React
 Dealing with State , Props for the value that will become Database as a value
-
+Use API from jsonplaceholder
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
