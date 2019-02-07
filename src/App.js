@@ -1,35 +1,45 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'; // a package for router
 import Header from './components/layout/Header'; // import header layout from folder ./components/layout
 import Todos from './components/Todos'; // import Todos component from folder ./components
 import AddTodo from './components/AddTodo'; // import Todos component from folder ./components
-import uuid from 'uuid'; // generate random id
+import About from './components/pages/About'; // import About component from folder ./components/pages
+// import uuid from 'uuid'; // generate random id
 
 import './App.css'; // Import the CSS from App.css
+import axios from 'axios'; // import axios API
 
 class App extends Component {
 
-  // State is like a database to create a value, each component will have a state.
-  // We can pass down the state into Todos as a props
-  // uuid will generate different id in random 
-  state = {
-    todos : [
-      {
-        id: uuid.v4(),
-        title: 'Take out the trash',
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Dinner with wife',
-        completed: true
-      },
-      {
-        id: uuid.v4(),
-        title: 'Meeting with boss',
-        completed: false
-      }
-    ]
-  }
+    // State is like a database to create a value, each component will have a state.
+    // We can pass down the state into Todos as a props
+    // uuid will generate different id in random
+    state = {
+      todos : [
+        // Hard code of the state value
+        // {
+        //   id: uuid.v4(),
+        //   title: 'Take out the trash',
+        //   completed: false
+        // },
+        // {
+        //   id: uuid.v4(),
+        //   title: 'Dinner with wife',
+        //   completed: true
+        // },
+        // {
+        //   id: uuid.v4(),
+        //   title: 'Meeting with boss',
+        //   completed: false
+        // }
+      ]
+    }
+
+    // Get the component from the API using axios with json format
+    componentDidMount(){
+      axios.get('https://jsonplaceholder.typicode.com/todos/?_limit=10')
+      .then(res => this.setState({todos: res.data}))
+    }
 
 
   /* Method for dynamic : Toggle Complete */
@@ -53,10 +63,10 @@ class App extends Component {
   /* Method for dynamic : Delete Todo */
 
   delTodo = (id) => {
-    console.log(id); //test the button is working
-
-    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !==id)]});
-    //... mean copy everything that has already in state. Then we filter all the state which is id not the same with the id that we click
+    // console.log(id); //test the button is working
+    axios.delete('https://jsonplaceholder.typicode.com/todos/${id}')
+      .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !==id)]}));
+      //... mean copy everything that has already in state. Then we filter all the state which is id not the same with the id that we click
   }
 
   /* /Method for dynamic : Delete Todo */
@@ -64,27 +74,38 @@ class App extends Component {
   /* Method for dynamic : Add Todo */
   addTodo = (title) => {
     // console.log(title); // test the button is working
-    const newTodo = {
-      id : uuid.v4(),
+
+    axios.post('https://jsonplaceholder.typicode.com/todos', {
       title,
-      completed : false
-    }
-    this.setState({todos:[...this.state.todos, newTodo]});
+      completed: false
+    })
+      .then(res => this.setState({todos:[...this.state.todos, res.data]}));
+
   }
 
   /* /Method for dynamic : Add Todo */
 
   render() {
     // console.log(this.state.todos) // will be shown the state in the console
+    // Every single component should be wraped in Router if we would like to set up router
+    // <Todos /> is the customized Tag that created in Todos.js at components folder
     return (
-      // <Todos /> is the customized Tag that created in Todos.js at components folder
-      <div className="App">
-        <div>
-          <Header />
-          <AddTodo addTodo={this.addTodo} />
-          <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} delTodo={this.delTodo}/>
+      <Router>
+
+        <div className="App">
+          <div>
+            <Header />
+            <Route exact path="/" render={props =>(
+                <React.Fragment>
+                  <AddTodo addTodo={this.addTodo} />
+                  <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} delTodo={this.delTodo}/>
+                </React.Fragment>
+              )} />
+            <Route path="/about" component={About}/>
+
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
